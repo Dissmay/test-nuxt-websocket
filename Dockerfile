@@ -1,4 +1,4 @@
-FROM node:12.13-alpine
+FROM node:16.13
 
 WORKDIR /
 
@@ -8,6 +8,6 @@ RUN npm install
 
 ADD . .
 
-RUN npm run build
+# RUN npm run build
 
 CMD ["npm", "run", "dev"]

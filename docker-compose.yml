@@ -5,18 +5,15 @@ services:
         build:
             context: .
             dockerfile: ./Dockerfile
-        env_file:
-            - .env
-            - docker.env
-        volumes:
-            - ./src:/backend/src
-        depends_on:
-            - redis
-            - postgres
-            - mongo
+        # image: docker.pkg.github.com/dissmay/test-nginx-nestjs/test-nest
+        # command: npm run start:dev
+
+        # volumes:
+        #     - ./src:/backend/src
+        ports:
+            - 3000:3000
         networks:
             - postgres
-
     nginx:
         image: nginx
         ports:
