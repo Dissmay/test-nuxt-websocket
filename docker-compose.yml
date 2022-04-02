@@ -1,0 +1,36 @@
+version: "3"
+services:
+    main:
+        container_name: main
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        env_file:
+            - .env
+            - docker.env
+        volumes:
+            - ./src:/backend/src
+        depends_on:
+            - redis
+            - postgres
+            - mongo
+        networks:
+            - postgres
+
+    nginx:
+        image: nginx
+        ports:
+            - 80:80
+        volumes:
+            - ./conf.d/:/etc/nginx/conf.d
+        depends_on:
+            - main
+        networks:
+            - postgres
+
+networks:
+    postgres:
+        driver: bridge
+
+# volumes:
+#   demo:
